@@ -37,6 +37,7 @@
 #include "effects/bouncingballeffect.h"         // bouincing ball effectsenable+
 #include "effects/vueffect.h"                   // vu (sound) based effects
 #include "effects/tempeffect.h"
+#include "effects/FTCpaneleffects.h"            // Iron Reign FTC Panel
 
 
 #if ENABLE_AUDIO
@@ -233,7 +234,7 @@ CRGBPalette256 USAColors_p  =
 //
 // The master effects table
 
-
+CRGBPalette256 simpleWhite(CRGB::White);
 CRGBPalette256 rainbowPalette(RainbowColors_p);
 CRGBPalette256 blueSweep(CRGB::Blue, CRGB::Green);
 
@@ -271,6 +272,14 @@ DRAM_ATTR LEDStripEffect * AllEffects[] =
 
     new RainbowFillEffect(6, 2),
     new ClassicFireEffect(),
+
+#elif FTCPANELS
+    //new PaletteEffect(RainbowStripeColors_p, 8.0, .125, 0, 5, 1), // Rainbow palette
+    //new RainbowFillEffect(6, 2),
+    //new StatusEffect(CRGB::White),
+    //new ClassicFireEffect(),
+    //new FTCPanelEffect("FTC Match", spectrumBasicColors, 50, 70, -1.0, 3.0),
+    new FTCPanelEffect("FTC Match", simpleWhite, 50, 0, -1.0, 3.0),
 
 #elif TTGO 
 

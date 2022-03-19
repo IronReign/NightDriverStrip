@@ -235,6 +235,33 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
 
     #define ENABLE_WEBSERVER        0   // Turn on the internal webserver
 
+#elif FTCPANELS
+    #define ENABLE_WIFI             1   // Connect to WiFi
+    #define INCOMING_WIFI_ENABLED   1   // Accepting incoming color data and commands
+    #define WAIT_FOR_WIFI           0   // 1=Hold in setup until we have WiFi - for strips without effects
+    #define TIME_BEFORE_LOCAL       5   // How many seconds before the lamp times out and shows local content
+
+    #define NUM_CHANNELS    1
+    #define MATRIX_WIDTH    64   
+    #define MATRIX_HEIGHT   8
+    #define NUM_LEDS        (MATRIX_WIDTH * MATRIX_HEIGHT)
+    #define NUM_CHARS         5 //number of characters to display
+    #define NUM_CHARS_MAX     6 //number of chars to display when alliance display turned off
+
+    #define RESERVE_MEMORY  180000                // WiFi needs about 100K free to be able to (re)connect!
+    #define ENABLE_REMOTE   0                     // IR Remote Control
+    #define ENABLE_AUDIO    0                     // Listen for audio from the microphone and process it
+
+    #if M5STICKC || M5STICKCPLUS
+        #define LED_PIN0 26
+    #else
+        #define LED_PIN0 5
+    #endif
+
+    #define POWER_LIMIT_MW (4000)                 // 4V * 8A max on battery = 32 watts
+
+    #define DEFAULT_EFFECT_INTERVAL (1000 * 10)    //now 10 second cycle, 24 hr cycle was (1000*60*60*24)
+
 #elif STRAND
 
 
