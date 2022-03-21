@@ -235,6 +235,9 @@ CRGBPalette256 USAColors_p  =
 // The master effects table
 
 CRGBPalette256 simpleWhite(CRGB::White);
+CRGBPalette256 allianceRed(CRGB::Red);
+CRGBPalette256 allianceBlue(CRGB::Blue);
+
 CRGBPalette256 rainbowPalette(RainbowColors_p);
 CRGBPalette256 blueSweep(CRGB::Blue, CRGB::Green);
 
@@ -270,8 +273,9 @@ DRAM_ATTR LEDStripEffect * AllEffects[] =
 {
   #if DEMO 
 
-    new RainbowFillEffect(6, 2),
-    new ClassicFireEffect(),
+    //new RainbowFillEffect(6, 2),
+    //new ClassicFireEffect(),
+    new FTCPanelEffect("FTC Match", simpleWhite, 50, 0, -1.0, 3.0),
 
 #elif FTCPANELS
     //new PaletteEffect(RainbowStripeColors_p, 8.0, .125, 0, 5, 1), // Rainbow palette
