@@ -162,6 +162,8 @@
 #endif
 
 #include <ArduinoOTA.h>                         // For updating the flash over WiFi
+#include <Wire.h>
+#include <WireSlave.h>
 
 #include "ntptimeclient.h"                      // setting the system clock from ntp
 #include "socketserver.h"                       // our socket server for incoming
@@ -236,6 +238,29 @@ DRAM_ATTR const int gRingSizeTable[MAX_RINGS] =
 //
 
 extern DRAM_ATTR LEDStripEffect * AllEffects[];      // Main table of internal events in effects.cpp
+
+void i2cReceiver(int howMany);
+
+// function that executes whenever data is received from master
+// this function is registered as an event, see setup()
+void i2cReceiver(int howMany)
+{
+    int i=0;
+    /*
+    char receiveBuffer[254]; //set a maximum receive size 
+    while(1<Wire.available()) // loop through all the bytes
+    {
+        if (i<255) {
+            receiveBuffer[i]= Wire.read(); // receive byte
+            i++;
+        } 
+        
+    }
+    receiveBuffer[i]='\n';
+    i=0;
+    */
+    //debugI("i2c Message: %s", "something");
+}
 
 //
 // Optional Components
@@ -451,6 +476,18 @@ void setup()
     CheckHeap();
 
     delay(100);
+
+#define SDA_PIN 21
+#define SCL_PIN 22
+#define I2C_SLAVE_ADDR 0x04
+
+    bool success=Wire.begin(SDA_PIN, SCL_PIN, I2C_SLAVE_ADDR);                // join i2c bus with address #4
+        if (!success) {
+        debugI("I2C slave init failed");
+        while(1) delay(100);
+    }
+    WireSlave.onReceive(i2cReceiver); // register event for handling commands received over I2C lines
+    
 
     // If we have a remote control enabled, set the direction on its input pin accordingly
 
@@ -737,7 +774,7 @@ void loop()
                     ArduinoOTA.handle();
             }
         #endif 
-
+        WireSlave.update();
         delay(10);        
     }
 }

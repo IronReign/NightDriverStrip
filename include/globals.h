@@ -160,7 +160,7 @@
 #include <exception>
 #include "RemoteDebug.h"
 
-using namespace std;
+//using namespace std; this is bad practice
 
 #include<sstream>
 

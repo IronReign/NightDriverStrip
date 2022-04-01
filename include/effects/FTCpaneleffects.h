@@ -55,6 +55,19 @@ class FTCPanelEffect : public LEDStripEffect
 
     CRGBPalette256 _palette;
 
+    enum Commands {
+        CHANGE_LED_LENGTH=0x70,
+        WRITE_SINGLE_LED_COLOR=0x71,
+        WRITE_ALL_LED_COLOR=0x72,
+        WRITE_RED_ARRAY=0x73,
+        WRITE_GREEN_ARRAY=0x74,
+        WRITE_BLUE_ARRAY=0x75,
+        WRITE_SINGLE_LED_BRIGHTNESS=0x76,
+        WRITE_ALL_LED_BRIGHTNESS=0x77,
+        WRITE_ALL_LED_OFF=0x78,
+        WRITE_SET_ALLIANCE=0x79
+    }; 
+
 
     //DrawAlliance
     //
@@ -160,6 +173,25 @@ class FTCPanelEffect : public LEDStripEffect
           _palette(baseColor)
     {
     }
+
+    void Command (char *buffer){
+        //assume a well-formed buffer where the 1st byte is the Command
+        byte cmd = (byte)buffer[0];
+        switch (cmd) {
+            case WRITE_SET_ALLIANCE:
+                break;
+
+
+            case WRITE_ALL_LED_COLOR:
+                break;
+
+            default:
+                break;
+                //do nothing
+
+        }
+    }
+  
 
     virtual void Draw()
     {
