@@ -65,11 +65,11 @@
 
 extern DRAM_ATTR unique_ptr<LEDBufferManager> g_apBufferManager[NUM_CHANNELS];
 
-extern byte g_Brightness;                           // Global brightness from drawing.cpp
+extern uint8_t g_Brightness;                           // Global brightness from drawing.cpp
 extern double g_BufferAgeOldest;                    // Age of oldest frame in WiFi buffer
 extern double g_BufferAgeNewest;                    // Age of newest frame in WiFi buffer
 extern DRAM_ATTR bool g_bUpdateStarted;             // Has an OTA update started?
-extern byte g_Brightness;                           // Global brightness from drawing.cpp
+extern uint8_t g_Brightness;                           // Global brightness from drawing.cpp
 extern DRAM_ATTR AppTime g_AppTime;                 // For keeping track of frame timings
 extern DRAM_ATTR uint32_t g_FPS;                    // Our global framerate
 extern volatile float gVU;

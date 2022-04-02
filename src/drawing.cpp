@@ -137,8 +137,8 @@ DRAM_ATTR uint64_t g_msLastWifiDraw  = 0;
 DRAM_ATTR double   g_BufferAgeOldest = 0;
 DRAM_ATTR double   g_BufferAgeNewest = 0;
 
-DRAM_ATTR byte     g_Brightness      = 255;
-DRAM_ATTR byte     g_Fader           = 255;
+DRAM_ATTR uint8_t     g_Brightness      = 255;
+DRAM_ATTR uint8_t     g_Fader           = 255;
 
 // DrawLoopTaskEntry
 // 

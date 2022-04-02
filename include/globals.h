@@ -72,6 +72,11 @@
 //
 // If you know a cleaner way, please improve this!
 
+//compiler changes for newer Espressif frameworks make register obsolete
+#if __cplusplus > 199711L 
+    #define register
+#endif
+
 #define FLASH_VERSION          022  // Update ONLY this to increment the version number
 
 #define XSTR(x) STR(x)              // The defs will generate the stringized version of it
@@ -1242,7 +1247,7 @@ inline double mapDouble(double x, double in_min, double in_max, double out_min, 
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-inline uint64_t ULONGFromMemory(byte * payloadData)
+inline uint64_t ULONGFromMemory(uint8_t * payloadData)
 {
     return  (uint64_t)payloadData[7] << 56  | 
             (uint64_t)payloadData[6] << 48  | 
@@ -1254,7 +1259,7 @@ inline uint64_t ULONGFromMemory(byte * payloadData)
             (uint64_t)payloadData[0];
 }
 
-inline uint32_t DWORDFromMemory(byte * payloadData)
+inline uint32_t DWORDFromMemory(uint8_t * payloadData)
 {
     return  (uint32_t)payloadData[3] << 24  | 
             (uint32_t)payloadData[2] << 16  | 
@@ -1262,7 +1267,7 @@ inline uint32_t DWORDFromMemory(byte * payloadData)
             (uint32_t)payloadData[0];
 }
 
-inline uint16_t WORDFromMemory(byte * payloadData)
+inline uint16_t WORDFromMemory(uint8_t * payloadData)
 {
     return  (uint16_t)payloadData[1] << 8   | 
             (uint16_t)payloadData[0];

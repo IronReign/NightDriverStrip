@@ -118,7 +118,7 @@ class LEDStripEffect
 	static inline CRGB RandomSaturatedColor()
 	{
 		CRGB c;
-		c.setHSV((byte)randomDouble(0, 255), 255, 255);
+		c.setHSV((uint8_t)randomDouble(0, 255), 255, 255);
 		return c;
 	}
 

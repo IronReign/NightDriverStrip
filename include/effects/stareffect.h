@@ -259,8 +259,8 @@ class ColorCycleStar : public Star
 class MultiColorStar : public Star
 {
     protected:
-    byte         _brightness;
-    byte         _hue;
+    uint8_t         _brightness;
+    uint8_t         _hue;
 
     public:
     MultiColorStar(const CRGBPalette256 & palette, TBlendType blendType = LINEARBLEND, double maxSpeed = 2.0, int speedDivisor = 1)

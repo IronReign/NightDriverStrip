@@ -94,7 +94,7 @@ class FTCPanelEffect : public LEDStripEffect
     //
     // Draws a given character from the IronFont
 
-    void DrawChar(byte iChar, uint16_t baseColor, char n, int panelStart)
+    void DrawChar(uint8_t iChar, uint16_t baseColor, char n, int panelStart)
     {
         auto pGFXChannel = _GFX[0];
 
@@ -130,7 +130,7 @@ class FTCPanelEffect : public LEDStripEffect
 		    msPeakAge = PeakFadeTime_ms;
 	    
         float agePercent = (float) msPeakAge / (float) MS_PER_SECOND;
-	    byte fadeAmount = std::min(255.0f, agePercent * 256);
+	    uint8_t fadeAmount = std::min(255.0f, agePercent * 256);
 
         colorHighlight = CRGB(CRGB::White).fadeToBlackBy(fadeAmount);
 
@@ -176,7 +176,7 @@ class FTCPanelEffect : public LEDStripEffect
 
     void Command (char *buffer){
         //assume a well-formed buffer where the 1st byte is the Command
-        byte cmd = (byte)buffer[0];
+        uint8_t cmd = (uint8_t)buffer[0];
         switch (cmd) {
             case WRITE_SET_ALLIANCE:
                 break;

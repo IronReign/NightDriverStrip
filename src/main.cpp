@@ -163,7 +163,7 @@
 
 #include <ArduinoOTA.h>                         // For updating the flash over WiFi
 #include <Wire.h>
-#include <WireSlave.h>
+//#include <WireSlave.h>
 
 #include "ntptimeclient.h"                      // setting the system clock from ntp
 #include "socketserver.h"                       // our socket server for incoming
@@ -481,12 +481,12 @@ void setup()
 #define SCL_PIN 22
 #define I2C_SLAVE_ADDR 0x04
 
-    bool success=Wire.begin(SDA_PIN, SCL_PIN, I2C_SLAVE_ADDR);                // join i2c bus with address #4
+    bool success=Wire.begin((uint8_t)I2C_SLAVE_ADDR, SDA_PIN, SCL_PIN);                // join i2c bus with address #4
         if (!success) {
         debugI("I2C slave init failed");
         while(1) delay(100);
     }
-    WireSlave.onReceive(i2cReceiver); // register event for handling commands received over I2C lines
+    Wire.onReceive(i2cReceiver); // register event for handling commands received over I2C lines
     
 
     // If we have a remote control enabled, set the direction on its input pin accordingly
@@ -774,7 +774,7 @@ void loop()
                     ArduinoOTA.handle();
             }
         #endif 
-        WireSlave.update();
+        //WireSlave.update();
         delay(10);        
     }
 }

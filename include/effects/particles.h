@@ -647,11 +647,11 @@ class HotWhiteRingParticle : public FadingObject
         {
           double age = Age() - PreignitionTime() - IgnitionTime();
 
-          byte temperature = 255 * (1.0 - (age/FadeTime()));
-          byte t192 = round((temperature/255.0)*191);
+          uint8_t temperature = 255 * (1.0 - (age/FadeTime()));
+          uint8_t t192 = round((temperature/255.0)*191);
 
           // calculate ramp up from
-          byte heatramp = t192 & 0x3F; // 0..63
+          uint8_t heatramp = t192 & 0x3F; // 0..63
           heatramp <<= 2; // scale up to 0..252
 
           if( t192 > 0x80)                      // hottest

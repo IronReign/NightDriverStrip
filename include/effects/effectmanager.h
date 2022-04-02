@@ -51,8 +51,8 @@
 
 using namespace std;
 
-extern byte g_Brightness;
-extern byte g_Fader;
+extern uint8_t g_Brightness;
+extern uint8_t g_Fader;
 
 // References to functions in other C files
 
