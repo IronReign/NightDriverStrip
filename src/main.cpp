@@ -217,6 +217,7 @@ DRAM_ATTR unique_ptr<LEDBufferManager> g_apBufferManager[NUM_CHANNELS];     // E
 DRAM_ATTR unique_ptr<EffectManager>    g_pEffectManager;                    // The one and only global effect manager
 DRAM_ATTR mutex NTPTimeClient::_clockMutex;                                      // Clock guard mutex for SNTP client
 DRAM_ATTR RemoteDebug Debug;                                                // Instance of our telnet debug server
+DRAM_ATTR int alliance = 0;
 
 // If an insulator or tree or fan has multiple rings, this table defines how those rings are laid out such
 // that they add up to FAN_SIZE pixels total per ring.
@@ -239,6 +240,11 @@ DRAM_ATTR const int gRingSizeTable[MAX_RINGS] =
 
 extern DRAM_ATTR LEDStripEffect * AllEffects[];      // Main table of internal events in effects.cpp
 
+#define SDA_PIN 21
+#define SCL_PIN 22
+#define I2C_SLAVE_ADDR 0x30
+#define ALLIANCE_PIN 15
+
 void i2cReceiver(int howMany);
 
 // function that executes whenever data is received from master
@@ -246,7 +252,7 @@ void i2cReceiver(int howMany);
 void i2cReceiver(int howMany)
 {
     int i=0;
-    /*
+    
     char receiveBuffer[254]; //set a maximum receive size 
     while(1<Wire.available()) // loop through all the bytes
     {
@@ -258,8 +264,8 @@ void i2cReceiver(int howMany)
     }
     receiveBuffer[i]='\n';
     i=0;
-    */
-    //debugI("i2c Message: %s", "something");
+    
+    debugI("i2c Message: %s", "something");
 }
 
 //
@@ -477,17 +483,18 @@ void setup()
 
     delay(100);
 
-#define SDA_PIN 21
-#define SCL_PIN 22
-#define I2C_SLAVE_ADDR 0x04
 
-    bool success=Wire.begin((uint8_t)I2C_SLAVE_ADDR, SDA_PIN, SCL_PIN);                // join i2c bus with address #4
+
+    bool success=Wire.begin((uint8_t)I2C_SLAVE_ADDR, SDA_PIN, SCL_PIN);                // join i2c bus with address 30
         if (!success) {
         debugI("I2C slave init failed");
         while(1) delay(100);
     }
     Wire.onReceive(i2cReceiver); // register event for handling commands received over I2C lines
     
+    //until i2c slave is working, using pin 15 to signal alliance with a pull down connection through a switch on pin ALLIANCE_PIN
+    pinMode(ALLIANCE_PIN, INPUT_PULLUP); //pullup through internal resistor
+
 
     // If we have a remote control enabled, set the direction on its input pin accordingly
 
@@ -775,6 +782,7 @@ void loop()
             }
         #endif 
         //WireSlave.update();
-        delay(10);        
+        alliance = digitalRead(ALLIANCE_PIN);
+        delay(100);        
     }
 }

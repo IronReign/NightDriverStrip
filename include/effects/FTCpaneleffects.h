@@ -214,7 +214,7 @@ class FTCPanelEffect : public LEDStripEffect
         std::lock_guard<std::mutex> guard(Screen::_screenMutex);
 
         //DrawVUMeter(0);
-        char teamnum[] = "reign";
+        char teamnum[] = " 6832";
         for (int i = 0; i < strlen(teamnum); i++)
         {
             CRGB bandColor = ColorFromPalette(_palette, (::map(i, 0, NUM_CHARS, 0, 255) + _colorOffset) % 256);
@@ -222,6 +222,8 @@ class FTCPanelEffect : public LEDStripEffect
             DrawChar(i, pGFXChannel->to16bit(bandColor), teamnum[i],panelWidth); //multicolor palette
             //DrawBand(i, pGFXChannel->to16bit(CRGB(CRGB::Red)), teamnum[i]);
         }
+        allianceIsRed = (alliance==ALLIANCE_RED);
+            
 
         DrawAlliance(allianceIsRed, 0, 0); //panel 0
         DrawAlliance(allianceIsRed, panelWidth, 0); //panel 1

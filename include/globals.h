@@ -240,6 +240,8 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
 
     #define ENABLE_WEBSERVER        0   // Turn on the internal webserver
 
+
+
 #elif FTCPANELS
     #define ENABLE_WIFI             1   // Connect to WiFi
     #define INCOMING_WIFI_ENABLED   1   // Accepting incoming color data and commands
@@ -266,6 +268,13 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     #define POWER_LIMIT_MW (4000)                 // 4V * 8A max on battery = 32 watts
 
     #define DEFAULT_EFFECT_INTERVAL (1000 * 10)    //now 10 second cycle, 24 hr cycle was (1000*60*60*24)
+    
+    //global variable for an alliance
+    #define ALLIANCE_RED        0
+    #define ALLIANCE_BLUE       1
+    #define ALLIANCE_OFF        2
+
+    extern int alliance;
 
 #elif STRAND
 
